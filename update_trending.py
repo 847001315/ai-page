@@ -178,33 +178,35 @@ def build_card_html(item: Dict[str, str]) -> str:
 
 
 def update_index_html(cards_html: List[str]) -> None:
-  """读取 index.html，替换 id="content-grid" 中的内容为新卡片。"""
-  from bs4 import BeautifulSoup
+    with open(INDEX_HTML_PATH, "r", encoding="utf-8") as f:
+        html_content = f.read()
 
-  with open(INDEX_HTML_PATH, "r", encoding="utf-8") as f:
-    html = f.read()
+    soup = BeautifulSoup(html_content, "html.parser")
+    grid = soup.select_one("#content-grid") # 使用 CSS 选择器通常更准
 
-  soup = BeautifulSoup(html, "html.parser")
-  grid = soup.find(id="content-grid")
-  if grid is None:
-    raise RuntimeError('未在 index.html 中找到 id="content-grid" 的元素。')
+    if not grid:
+        print("错误：在 index.html 中没找到 id='content-grid' 的容器！")
+        return
 
-   # 如果没有任何卡片内容，避免把原来的内容清空
-  if not cards_html:
-    print("cards_html 为空，跳过对 index.html 的修改（避免清空内容）。")
-    return
+    if not cards_html:
+        print("警告：没有新的卡片内容可以写入。")
+        return
 
-  # 清空旧内容
-  grid.clear()
+    # 清空旧内容
+    grid.clear()
+    
+    # 将所有卡片 HTML 拼接并解析为文档片段
+    combined_html = "".join(cards_html)
+    cards_soup = BeautifulSoup(combined_html, "html.parser")
+    
+    # 插入新内容
+    grid.append(cards_soup)
 
-  # 插入新卡片（保持与原缩进基本一致）
-  for card in cards_html:
-    frag = BeautifulSoup(card, "html.parser")
-    for child in frag.contents:
-      grid.append(child)
-
-  with open(INDEX_HTML_PATH, "w", encoding="utf-8") as f:
-    f.write(str(soup))
+    # 写回文件
+    with open(INDEX_HTML_PATH, "w", encoding="utf-8") as f:
+        # 使用 str(soup) 保持原样输出
+        f.write(soup.prettify(formatter="html"))
+    print("成功：index.html 已更新。")
 
 
 def run_git_commands() -> None:

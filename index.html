@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
-<head>
-<meta charset="utf-8"/>
-<title>AI 导航站test</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-    /* 自定义 Apple 风格细节 */
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   AI 导航站test
+  </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   /* 自定义 Apple 风格细节 */
     body {
       background-color: #F9FAFB;
       -webkit-font-smoothing: antialiased;
@@ -39,121 +41,205 @@
       border-radius: 9999px;
     }
   </style>
-</head>
-<body class="min-h-screen text-slate-900">
-<!-- 整体布局容器 -->
-<div class="min-h-screen flex flex-col lg:flex-row">
-<!-- 顶部导航（仅在小屏显示） -->
-<header class="lg:hidden sticky top-0 z-20 bg-[#F9FAFB]/95 backdrop-blur border-b border-slate-200/70">
-<div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-slate-900 text-white text-sm font-semibold">AI</span>
-<div class="flex flex-col leading-tight">
-<span class="text-sm font-semibold tracking-tight">AI 导航站</span>
-<span class="text-xs text-slate-500">Apple Style · 单页面</span>
-</div>
-</div>
-</div>
-<nav class="max-w-6xl mx-auto px-3 pb-2">
-<div class="flex flex-wrap gap-2 text-xs">
-<button class="category-btn px-3 py-1.5 rounded-full bg-slate-900 text-slate-100 font-medium" data-category="all">全部</button>
-<button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="office">AI 办公</button>
-<button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="side">副业案例</button>
-<button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="script">自动脚本</button>
-<button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="productivity">效率工具</button>
-</div>
-</nav>
-</header>
-<!-- 左侧 Sidebar（大屏显示） -->
-<aside class="hidden lg:flex lg:flex-col lg:w-64 border-r border-slate-200/70 bg-[#F9FAFB]/90 backdrop-blur">
-<div class="px-6 pt-6 pb-4 border-b border-slate-200/70">
-<div class="flex items-center gap-3">
-<span class="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-slate-900 text-white text-sm font-semibold shadow-sm">
-            AI
-          </span>
-<div class="flex flex-col">
-<span class="text-sm font-semibold tracking-tight">AI 导航站</span>
-<span class="text-xs text-slate-500">精选工具 · 一页搞定</span>
-</div>
-</div>
-</div>
-<div class="flex-1 px-6 py-5 space-y-6 text-sm">
-<section>
-<h2 class="mb-3 text-xs font-semibold tracking-wide text-slate-500 uppercase">分类</h2>
-<nav class="space-y-1 text-sm">
-<button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-100 font-medium" data-category="all">
-<span class="flex items-center gap-2">
-<span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-                全部推荐
-              </span>
-<span class="text-[10px] uppercase tracking-wide text-slate-200/80">All</span>
-</button>
-<button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="office">
-<span class="flex items-center gap-2">
-<span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
-                AI 办公
-              </span>
-<span class="text-[10px] uppercase tracking-wide text-slate-400">Office</span>
-</button>
-<button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="side">
-<span class="flex items-center gap-2">
-<span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
-                副业案例
-              </span>
-<span class="text-[10px] uppercase tracking-wide text-slate-400">Side</span>
-</button>
-<button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="script">
-<span class="flex items-center gap-2">
-<span class="h-1.5 w-1.5 rounded-full bg-violet-400"></span>
-                自动脚本
-              </span>
-<span class="text-[10px] uppercase tracking-wide text-slate-400">Script</span>
-</button>
-<button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="productivity">
-<span class="flex items-center gap-2">
-<span class="h-1.5 w-1.5 rounded-full bg-rose-400"></span>
-                效率工具
-              </span>
-<span class="text-[10px] uppercase tracking-wide text-slate-400">Tools</span>
-</button>
-</nav>
-</section>
-<section class="border-t border-slate-200/70 pt-4">
-<h2 class="mb-3 text-xs font-semibold tracking-wide text-slate-500 uppercase">提示</h2>
-<p class="text-xs leading-relaxed text-slate-500">
-            后续你可以用 Python 批量生成卡片 HTML，
-            替换右侧网格中的“卡片模板”区域即可，无需改动整体布局结构。
-          </p>
-</section>
-</div>
-<div class="px-6 pb-6 text-[11px] text-slate-400 border-t border-slate-200/70">
-        Crafted in Apple Style · 单页静态
+ </head>
+ <body class="min-h-screen text-slate-900">
+  <!-- 整体布局容器 -->
+  <div class="min-h-screen flex flex-col lg:flex-row">
+   <!-- 顶部导航（仅在小屏显示） -->
+   <header class="lg:hidden sticky top-0 z-20 bg-[#F9FAFB]/95 backdrop-blur border-b border-slate-200/70">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+     <div class="flex items-center gap-2">
+      <span class="inline-flex h-7 w-7 items-center justify-center rounded-xl bg-slate-900 text-white text-sm font-semibold">
+       AI
+      </span>
+      <div class="flex flex-col leading-tight">
+       <span class="text-sm font-semibold tracking-tight">
+        AI 导航站
+       </span>
+       <span class="text-xs text-slate-500">
+        Apple Style &middot; 单页面
+       </span>
       </div>
-</aside>
-<!-- 右侧内容区域 -->
-<main class="flex-1">
-<div class="max-w-6xl mx-auto px-4 lg:px-8 py-6 lg:py-10">
-<!-- 顶部标题（仅大屏显示） -->
-<div class="hidden lg:flex items-end justify-between mb-8">
-<div>
-<h1 class="text-2xl font-semibold tracking-tight text-slate-900">
-              精选 AI 工具导航
-            </h1>
-<p class="mt-1 text-sm text-slate-500">
-              涵盖办公、自动化脚本、副业变现与效率工具，一屏快速浏览。
-            </p>
-</div>
-</div>
-<!-- 卡片网格 -->
-<section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 auto-rows-fr" id="content-grid">
-
-</section>
-</div>
-</main>
-</div>
-<!-- 分类过滤的简单交互脚本（可删） -->
-<script>
-    const buttons = document.querySelectorAll('.category-btn');
+     </div>
+    </div>
+    <nav class="max-w-6xl mx-auto px-3 pb-2">
+     <div class="flex flex-wrap gap-2 text-xs">
+      <button class="category-btn px-3 py-1.5 rounded-full bg-slate-900 text-slate-100 font-medium" data-category="all">
+       全部
+      </button>
+      <button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="office">
+       AI 办公
+      </button>
+      <button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="side">
+       副业案例
+      </button>
+      <button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="script">
+       自动脚本
+      </button>
+      <button class="category-btn px-3 py-1.5 rounded-full bg-slate-100 text-slate-700" data-category="productivity">
+       效率工具
+      </button>
+     </div>
+    </nav>
+   </header>
+   <!-- 左侧 Sidebar（大屏显示） -->
+   <aside class="hidden lg:flex lg:flex-col lg:w-64 border-r border-slate-200/70 bg-[#F9FAFB]/90 backdrop-blur">
+    <div class="px-6 pt-6 pb-4 border-b border-slate-200/70">
+     <div class="flex items-center gap-3">
+      <span class="inline-flex h-8 w-8 items-center justify-center rounded-2xl bg-slate-900 text-white text-sm font-semibold shadow-sm">
+       AI
+      </span>
+      <div class="flex flex-col">
+       <span class="text-sm font-semibold tracking-tight">
+        AI 导航站
+       </span>
+       <span class="text-xs text-slate-500">
+        精选工具 &middot; 一页搞定
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="flex-1 px-6 py-5 space-y-6 text-sm">
+     <section>
+      <h2 class="mb-3 text-xs font-semibold tracking-wide text-slate-500 uppercase">
+       分类
+      </h2>
+      <nav class="space-y-1 text-sm">
+       <button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 bg-slate-900 text-slate-100 font-medium" data-category="all">
+        <span class="flex items-center gap-2">
+         <span class="h-1.5 w-1.5 rounded-full bg-emerald-400">
+         </span>
+         全部推荐
+        </span>
+        <span class="text-[10px] uppercase tracking-wide text-slate-200/80">
+         All
+        </span>
+       </button>
+       <button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="office">
+        <span class="flex items-center gap-2">
+         <span class="h-1.5 w-1.5 rounded-full bg-sky-400">
+         </span>
+         AI 办公
+        </span>
+        <span class="text-[10px] uppercase tracking-wide text-slate-400">
+         Office
+        </span>
+       </button>
+       <button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="side">
+        <span class="flex items-center gap-2">
+         <span class="h-1.5 w-1.5 rounded-full bg-amber-400">
+         </span>
+         副业案例
+        </span>
+        <span class="text-[10px] uppercase tracking-wide text-slate-400">
+         Side
+        </span>
+       </button>
+       <button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="script">
+        <span class="flex items-center gap-2">
+         <span class="h-1.5 w-1.5 rounded-full bg-violet-400">
+         </span>
+         自动脚本
+        </span>
+        <span class="text-[10px] uppercase tracking-wide text-slate-400">
+         Script
+        </span>
+       </button>
+       <button class="category-btn group flex w-full items-center justify-between rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100" data-category="productivity">
+        <span class="flex items-center gap-2">
+         <span class="h-1.5 w-1.5 rounded-full bg-rose-400">
+         </span>
+         效率工具
+        </span>
+        <span class="text-[10px] uppercase tracking-wide text-slate-400">
+         Tools
+        </span>
+       </button>
+      </nav>
+     </section>
+     <section class="border-t border-slate-200/70 pt-4">
+      <h2 class="mb-3 text-xs font-semibold tracking-wide text-slate-500 uppercase">
+       提示
+      </h2>
+      <p class="text-xs leading-relaxed text-slate-500">
+       后续你可以用 Python 批量生成卡片 HTML，
+            替换右侧网格中的&ldquo;卡片模板&rdquo;区域即可，无需改动整体布局结构。
+      </p>
+     </section>
+    </div>
+    <div class="px-6 pb-6 text-[11px] text-slate-400 border-t border-slate-200/70">
+     Crafted in Apple Style &middot; 单页静态
+    </div>
+   </aside>
+   <!-- 右侧内容区域 -->
+   <main class="flex-1">
+    <div class="max-w-6xl mx-auto px-4 lg:px-8 py-6 lg:py-10">
+     <!-- 顶部标题（仅大屏显示） -->
+     <div class="hidden lg:flex items-end justify-between mb-8">
+      <div>
+       <h1 class="text-2xl font-semibold tracking-tight text-slate-900">
+        精选 AI 工具导航
+       </h1>
+       <p class="mt-1 text-sm text-slate-500">
+        涵盖办公、自动化脚本、副业变现与效率工具，一屏快速浏览。
+       </p>
+      </div>
+     </div>
+     <!-- 卡片网格 -->
+     <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 auto-rows-fr" id="content-grid">
+      <article class="card-item group glass-card card-hover rounded-2xl border border-slate-200/80 p-4 flex flex-col justify-between" data-category="script">
+       <div class="flex items-start gap-3">
+        <div class="h-9 w-9 rounded-2xl bg-violet-500 flex items-center justify-center text-white text-base shadow-sm">
+         ⚙️
+        </div>
+        <div class="flex-1 min-w-0">
+         <h3 class="text-sm font-semibold tracking-tight text-slate-900 truncate">
+          代码评审提示
+         </h3>
+         <p class="mt-1 text-xs text-slate-500 line-clamp-2">
+          提供 AI 辅助的代码评审提示词库，提升代码质量和评审效率，支持多种编程语言和场景。
+         </p>
+        </div>
+       </div>
+       <div class="mt-4 flex items-center justify-between gap-2">
+        <span class="inline-flex items-center rounded-full bg-slate-900 text-slate-100 px-2.5 py-1 text-[11px] font-medium">
+         体制内点评：可用于提升政务系统代码质量，辅助开发人员进行代码审查，减少潜在安全风险，助力代码规范化管理。
+        </span>
+        <a class="inline-flex items-center rounded-full bg-violet-100 text-violet-700 hover:bg-violet-200 px-3 py-1.5 text-[11px] font-medium" href="https://github.com/masoncl/review-prompts" target="_blank">
+         查看项目
+        </a>
+       </div>
+      </article>
+      <article class="card-item group glass-card card-hover rounded-2xl border border-slate-200/80 p-4 flex flex-col justify-between" data-category="script">
+       <div class="flex items-start gap-3">
+        <div class="h-9 w-9 rounded-2xl bg-violet-500 flex items-center justify-center text-white text-base shadow-sm">
+         ⚙️
+        </div>
+        <div class="flex-1 min-w-0">
+         <h3 class="text-sm font-semibold tracking-tight text-slate-900 truncate">
+          Codex技能库
+         </h3>
+         <p class="mt-1 text-xs text-slate-500 line-clamp-2">
+          Codex技能库，提供预定义技能，方便开发者快速构建基于Codex的AI应用，提升开发效率。
+         </p>
+        </div>
+       </div>
+       <div class="mt-4 flex items-center justify-between gap-2">
+        <span class="inline-flex items-center rounded-full bg-slate-900 text-slate-100 px-2.5 py-1 text-[11px] font-medium">
+         体制内点评：可用于政务服务大厅智能引导，快速构建常见业务办理的AI助手，提升服务效率和用户体验。
+        </span>
+        <a class="inline-flex items-center rounded-full bg-violet-100 text-violet-700 hover:bg-violet-200 px-3 py-1.5 text-[11px] font-medium" href="https://github.com/openai/skills" target="_blank">
+         查看项目
+        </a>
+       </div>
+      </article>
+     </section>
+    </div>
+   </main>
+  </div>
+  <!-- 分类过滤的简单交互脚本（可删） -->
+  <script>
+   const buttons = document.querySelectorAll('.category-btn');
     const cards = document.querySelectorAll('.card-item');
 
     function setActiveButton(target) {
@@ -187,5 +273,5 @@
       });
     });
   </script>
-</body>
+ </body>
 </html>
