@@ -13,8 +13,8 @@ os.environ["https_proxy"] = "http://127.0.0.1:7899"
 
 GITHUB_TRENDING_URL = "https://github.com/trending/python?since=daily"
 INDEX_HTML_PATH = "index.html"
-# 现在改为抓取最多 8 个项目
-MAX_PROJECTS = 8  # 最多展示多少个项目
+# 现在改为抓取最多 4 个项目
+MAX_PROJECTS = 2  # 最多展示多少个项目
 
 
 def fetch_trending_repos() -> List[Dict[str, str]]:
@@ -103,7 +103,7 @@ def enrich_with_gemini(
 """
     print("调用 Gemini 中，请稍候...")
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model="gemma-3-27b-it",
         contents=prompt,
     )
     text = (response.text or "").strip()
