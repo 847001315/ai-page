@@ -13,8 +13,8 @@ os.environ["https_proxy"] = "http://127.0.0.1:7899"
 
 GITHUB_TRENDING_URL = "https://github.com/trending/python?since=daily"
 INDEX_HTML_PATH = "index.html"
-# 为了方便调试和观察日志，先只抓取 1 个项目，后续再放开
-MAX_PROJECTS = 1  # 最多展示多少个项目
+# 现在改为抓取最多 8 个项目
+MAX_PROJECTS = 8  # 最多展示多少个项目
 
 
 def fetch_trending_repos() -> List[Dict[str, str]]:
@@ -189,6 +189,11 @@ def update_index_html(cards_html: List[str]) -> None:
   if grid is None:
     raise RuntimeError('未在 index.html 中找到 id="content-grid" 的元素。')
 
+   # 如果没有任何卡片内容，避免把原来的内容清空
+  if not cards_html:
+    print("cards_html 为空，跳过对 index.html 的修改（避免清空内容）。")
+    return
+
   # 清空旧内容
   grid.clear()
 
@@ -229,9 +234,11 @@ def main():
   print(f"已抓取 {len(projects)} 个项目，调用 Gemini 进行中文加工...")
   client = init_gemini_client()
   enriched = enrich_with_gemini(client, projects)
+  print(f"Gemini 处理完成，共得到 {len(enriched)} 条结果。")
 
   print("生成卡片 HTML...")
   cards_html = [build_card_html(p) for p in enriched]
+  print(f"准备写入 {len(cards_html)} 张卡片到 index.html ...")
 
   print("更新 index.html 中的 content-grid 区域...")
   update_index_html(cards_html)
