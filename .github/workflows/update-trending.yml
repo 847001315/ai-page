@@ -1,0 +1,37 @@
+# 每日自动“收菜”：抓取 GitHub Trending Python → Gemini 加工 → 更新 index.html → 提交并推送
+name: Auto Update Trending
+
+on:
+  # 每天 UTC 0:00 跑一次（北京时间 8:00）
+  schedule:
+    - cron: "0 0 * * *"
+  # 支持手动触发
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许 push 到当前仓库
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run update_trending.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python update_trending.py

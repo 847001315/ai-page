@@ -7,14 +7,15 @@ import requests
 from bs4 import BeautifulSoup
 from google import genai
 
-# 与 list_model.py / test_gemini.py 保持一致的代理设置
-os.environ["http_proxy"] = "http://127.0.0.1:7899"
-os.environ["https_proxy"] = "http://127.0.0.1:7899"
+# 仅在本地运行时使用代理；GitHub Actions 在海外无需代理
+if os.getenv("GITHUB_ACTIONS") != "true":
+  os.environ["http_proxy"] = "http://127.0.0.1:7899"
+  os.environ["https_proxy"] = "http://127.0.0.1:7899"
 
 GITHUB_TRENDING_URL = "https://github.com/trending/python?since=daily"
 INDEX_HTML_PATH = "index.html"
 # 现在改为抓取最多 4 个项目
-MAX_PROJECTS = 2  # 最多展示多少个项目
+MAX_PROJECTS = 4  # 最多展示多少个项目
 
 
 def fetch_trending_repos() -> List[Dict[str, str]]:
@@ -166,7 +167,7 @@ def build_card_html(item: Dict[str, str]) -> str:
             </div>
             <div class="mt-4 flex items-center justify-between gap-2">
               <span class="inline-flex items-center rounded-full bg-slate-900 text-slate-100 px-2.5 py-1 text-[11px] font-medium">
-                体制内点评：{item['comment']}
+                点评：{item['comment']}
               </span>
               <a href="{item['url']}" target="_blank"
                  class="inline-flex items-center rounded-full bg-violet-100 text-violet-700 hover:bg-violet-200 px-3 py-1.5 text-[11px] font-medium">
