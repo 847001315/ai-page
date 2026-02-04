@@ -6,6 +6,7 @@ from typing import List, Dict
 import requests
 from bs4 import BeautifulSoup
 from google import genai
+import google.genai as genai
 
 # 仅在本地运行时使用代理；GitHub Actions 在海外无需代理
 if os.getenv("GITHUB_ACTIONS") != "true":
